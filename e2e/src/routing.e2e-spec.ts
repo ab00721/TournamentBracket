@@ -23,7 +23,7 @@ describe('Routing', () => {
     expect(bracketsTitle.getText()).toContain('Brackets');
   });
 
-  it('should navigate to the brackets page', () => {
+  it('should navigate to the welcome page from brackets page', () => {
     browser.get('/brackets');
     const welcomeLink = element(by.id('welcome'));
     welcomeLink.click();
