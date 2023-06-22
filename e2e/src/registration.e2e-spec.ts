@@ -1,7 +1,7 @@
 import { browser, by, element } from 'protractor';
 
 describe('Registration', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     browser.get('/registration');
   });
 
@@ -55,4 +55,95 @@ describe('Registration', () => {
       });
     });
   });
+
+  it('should set error message if 7 contestants', () => {
+    const contestants = [ 'player1','player2','player3','player4','player5','player6','player7' ];
+    const contestantInputs = element.all(by.css('input[type="text"]'));
+    contestants.forEach((contestant,index) => {
+      contestantInputs.get(index).sendKeys(contestant);
+    });
+    const registerButton = element(by.id('submit'));
+    registerButton.click();
+
+    const errorMessage = element(by.id('message'));
+    errorMessage.getText().then((message) => {
+      expect(message).toContain('Should be 2, 4, or 8 contestants');
+    });
+  });
+
+  it('should set error message if 6 contestants', () => {
+    const contestants = [ 'player1','player2','player3','player4','player5','player6' ];
+    const contestantInputs = element.all(by.css('input[type="text"]'));
+    contestants.forEach((contestant,index) => {
+      contestantInputs.get(index).sendKeys(contestant);
+    });
+    const registerButton = element(by.id('submit'));
+    registerButton.click();
+
+    const errorMessage = element(by.id('message'));
+    errorMessage.getText().then((message) => {
+      expect(message).toContain('Should be 2, 4, or 8 contestants');
+    });
+  });
+
+  it('should set error message if 5 contestants', () => {
+    const contestants = [ 'player1','player2','player3','player4','player5' ];
+    const contestantInputs = element.all(by.css('input[type="text"]'));
+    contestants.forEach((contestant,index) => {
+      contestantInputs.get(index).sendKeys(contestant);
+    });
+    const registerButton = element(by.id('submit'));
+    registerButton.click();
+
+    const errorMessage = element(by.id('message'));
+    errorMessage.getText().then((message) => {
+      expect(message).toContain('Should be 2, 4, or 8 contestants');
+    });
+  });
+
+  it('should set error message if 3 contestants', () => {
+    const contestants = [ 'player1','player2','player3' ];
+    const contestantInputs = element.all(by.css('input[type="text"]'));
+    contestants.forEach((contestant,index) => {
+      contestantInputs.get(index).sendKeys(contestant);
+    });
+    const registerButton = element(by.id('submit'));
+    registerButton.click();
+
+    const errorMessage = element(by.id('message'));
+    errorMessage.getText().then((message) => {
+      expect(message).toContain('Should be 2, 4, or 8 contestants');
+    });
+  });
+
+  it('should set error message if 1 contestants', () => {
+    const contestants = [ 'player1' ];
+    const contestantInputs = element.all(by.css('input[type="text"]'));
+    contestants.forEach((contestant,index) => {
+      contestantInputs.get(index).sendKeys(contestant);
+    });
+    const registerButton = element(by.id('submit'));
+    registerButton.click();
+
+    const errorMessage = element(by.id('message'));
+    errorMessage.getText().then((message) => {
+      expect(message).toContain('Should be 2, 4, or 8 contestants');
+    });
+  });
+
+  it('should set error message if duplicate contestants', () => {
+    const contestants = [ 'player1','player1' ];
+    const contestantInputs = element.all(by.css('input[type="text"]'));
+    contestants.forEach((contestant,index) => {
+      contestantInputs.get(index).sendKeys(contestant);
+    });
+    const registerButton = element(by.id('submit'));
+    registerButton.click();
+
+    const errorMessage = element(by.id('message'));
+    errorMessage.getText().then((message) => {
+      expect(message).toContain('Duplicate player');
+    });
+  });
+
 });
