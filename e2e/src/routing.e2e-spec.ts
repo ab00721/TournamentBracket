@@ -3,8 +3,8 @@ import { browser, by, element } from 'protractor';
 describe('Routing', () => {
   it('should navigate to the welcome page', () => {
     browser.get('/');
-    const bracketsTitle = element(by.id('subpageTitle'));
-    expect(bracketsTitle.getText()).toContain('Brackets App');
+    const welcomeTitle = element(by.id('subpageTitle'));
+    expect(welcomeTitle.getText()).toContain('Brackets App');
   });
 
   it('should navigate to the registration page', () => {
@@ -21,5 +21,13 @@ describe('Routing', () => {
     bracketsLink.click();
     const bracketsTitle = element(by.id('subpageTitle'));
     expect(bracketsTitle.getText()).toContain('Brackets');
+  });
+
+  it('should navigate to the brackets page', () => {
+    browser.get('/brackets');
+    const welcomeLink = element(by.id('welcome'));
+    welcomeLink.click();
+    const welcomeTitle = element(by.id('subpageTitle'));
+    expect(welcomeTitle.getText()).toContain('Brackets App');
   });
 });
