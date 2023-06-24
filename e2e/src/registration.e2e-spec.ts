@@ -1,49 +1,56 @@
 import { browser, by, element } from 'protractor';
+import { TournamentService } from './tournament.service'
 
 describe('Registration', () => {
+  let tournamentService;
+
   beforeEach(() => {
+    tournamentService = new TournamentService();
     browser.get('/registration');
   });
 
   it('should autofill 2 contestants', () => {
+    const contestants = [ 'Zoe','Kaylee' ];
+
     const autofill2 = element(by.id('autoFill2'));
     autofill2.click()
 
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const contestantsList = element(by.id('message'));
-    contestantsList.getText().then((message) => {
-      const contestants = message.split(',');
-      expect(contestants.length).toBe(2);
+    const contestantsList = tournamentService.getMessage();
+    contestants.forEach((contestant) => {
+      expect(contestantsList).toContain(contestant);
     });
   });
 
   it('should autofill 4 contestants', () => {
+    const contestants = [ 'John','Paul', 'George', 'Ringo' ];
+
     const autofill4 = element(by.id('autoFill4'));
     autofill4.click()
 
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const contestantsList = element(by.id('message'));
-    contestantsList.getText().then((message) => {
-      const contestants = message.split(',');
-      expect(contestants.length).toBe(4);
+    const contestantsList = tournamentService.getMessage();
+    contestants.forEach((contestant) => {
+      expect(contestantsList).toContain(contestant);
     });
   });
 
   it('should autofill 8 contestants', () => {
+    const contestants = [ 'Leia','Luke', 'Lando', 'Han', 'Chewy', 'R2D2', 'C3P0', 'Vader' ];
+
     const autofill8 = element(by.id('autoFill8'));
     autofill8.click()
 
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const contestantsList = element(by.id('message'));
-    contestantsList.getText().then((message) => {
-      const contestants = message.split(',');
-      expect(contestants.length).toBe(8);
+    const contestantsList = tournamentService.getMessage();
+    contestants.forEach((contestant) => {
+      expect(contestantsList).toContain(contestant);
     });
   });
 
@@ -56,11 +63,9 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const contestantsList = element(by.id('message'));
-    contestantsList.getText().then((message) => {
-      contestants.forEach((contestant) => {
-        expect(message).toContain(contestant);
-      });
+    const contestantsList = tournamentService.getMessage();
+    contestants.forEach((contestant) => {
+      expect(contestantsList).toContain(contestant);
     });
   });
 
@@ -73,11 +78,9 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const contestantsList = element(by.id('message'));
-    contestantsList.getText().then((message) => {
-      contestants.forEach((contestant) => {
-        expect(message).toContain(contestant);
-      });
+    const contestantsList = tournamentService.getMessage();
+    contestants.forEach((contestant) => {
+      expect(contestantsList).toContain(contestant);
     });
   });
 
@@ -90,11 +93,9 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const contestantsList = element(by.id('message'));
-    contestantsList.getText().then((message) => {
-      contestants.forEach((contestant) => {
-        expect(message).toContain(contestant);
-      });
+    const contestantsList = tournamentService.getMessage();
+    contestants.forEach((contestant) => {
+      expect(contestantsList).toContain(contestant);
     });
   });
 
@@ -107,10 +108,8 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const errorMessage = element(by.id('message'));
-    errorMessage.getText().then((message) => {
-      expect(message).toEqual('Should be 2, 4, or 8 contestants');
-    });
+    const errorMessage = tournamentService.getMessage();
+    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 6 contestants', () => {
@@ -122,10 +121,8 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const errorMessage = element(by.id('message'));
-    errorMessage.getText().then((message) => {
-      expect(message).toEqual('Should be 2, 4, or 8 contestants');
-    });
+    const errorMessage = tournamentService.getMessage();
+    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 5 contestants', () => {
@@ -137,10 +134,8 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const errorMessage = element(by.id('message'));
-    errorMessage.getText().then((message) => {
-      expect(message).toEqual('Should be 2, 4, or 8 contestants');
-    });
+    const errorMessage = tournamentService.getMessage();
+    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 3 contestants', () => {
@@ -152,10 +147,8 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const errorMessage = element(by.id('message'));
-    errorMessage.getText().then((message) => {
-      expect(message).toEqual('Should be 2, 4, or 8 contestants');
-    });
+    const errorMessage = tournamentService.getMessage();
+    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 1 contestants', () => {
@@ -167,10 +160,8 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const errorMessage = element(by.id('message'));
-    errorMessage.getText().then((message) => {
-      expect(message).toEqual('Should be 2, 4, or 8 contestants');
-    });
+    const errorMessage = tournamentService.getMessage();
+    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if duplicate contestants', () => {
@@ -182,10 +173,8 @@ describe('Registration', () => {
     const registerButton = element(by.id('submit'));
     registerButton.click();
 
-    const errorMessage = element(by.id('message'));
-    errorMessage.getText().then((message) => {
-      expect(message).toEqual('Duplicate player');
-    });
+    const errorMessage = tournamentService.getMessage();
+    expect(errorMessage).toEqual('Duplicate player');
   });
 
 });
