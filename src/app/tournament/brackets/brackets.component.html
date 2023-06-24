@@ -1,10 +1,10 @@
 <h2 id="subpageTitle">Brackets</h2>
 
-<h3>Round: {{roundId}}</h3>
+<h3 id="round">Round: {{roundId}}</h3>
 
 <h4 *ngIf="message">{{message}}</h4>
 
-<h4 *ngIf="getChampion()">Winner: {{getChampion()}}</h4>
+<h4 id="champion" *ngIf="getChampion()">Winner: {{getChampion()}}</h4>
 
 <div *ngFor="let m of seeds; index as i" [id]="'match'+(i+1)">
   <div>
@@ -25,4 +25,5 @@
 <button
     *ngIf="!getChampion()"
     type='button'
+    id="completeRound"
     (click)="completeRound()">Complete Round</button>
