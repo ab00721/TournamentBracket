@@ -6,7 +6,7 @@
 
 <h4 id="champion" *ngIf="getChampion()">Winner: {{getChampion()}}</h4>
 
-<div *ngFor="let m of seeds; index as i" [id]="'match'+(i+1)">
+<div *ngFor="let m of seeds; index as i" id="matches">
   <div>
     <h4>Match {{i+1}}</h4>
     <input type="radio"
