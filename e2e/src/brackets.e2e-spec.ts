@@ -289,6 +289,38 @@ describe('Brackets', () => {
       const champion = element(by.id('champion'));
       expect(champion.getText()).toEqual('Winner: player1');
     });
+
+
+    it('should set error message if matches are not complete', () => {
+      const contestants = ['player1', 'player2', 'player3', 'player4'];
+      const contestantInputs = element.all(by.css('input[type="text"]'));
+      contestants.forEach((contestant, index) => {
+        contestantInputs.get(index).sendKeys(contestant);
+      });
+      const registerButton = element(by.id('submit'));
+      registerButton.click();
+
+      const bracketsLink = element(by.id('brackets'));
+      bracketsLink.click();
+
+      const round = element(by.id('round'));
+      expect(round.getText()).toEqual('Round: 1');
+
+      const matchesR1 = element.all(by.id('matches'));
+      expect(matchesR1.count()).toEqual(2);
+
+      const match1R1 = matchesR1.get(0);
+      const player1match1R1 = match1R1.element(by.id('player1match1'));
+      player1match1R1.click();
+
+      const completeRound = element(by.id('completeRound'));
+      completeRound.click();
+
+      expect(round.getText()).toEqual('Round: 1');
+
+      const message = element(by.id('message'));
+      expect(message.getText()).toEqual('Please complete all matches');
+    });
   });
 
 });
