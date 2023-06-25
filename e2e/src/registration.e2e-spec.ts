@@ -12,9 +12,7 @@ describe('Registration', () => {
   it('should autofill 2 contestants', () => {
     const contestants = [ 'Zoe','Kaylee' ];
 
-    const autofill2 = element(by.id('autoFill2'));
-    autofill2.click()
-
+    tournamentService.autofill(2);
     tournamentService.registerContestants();
 
     const contestantsList = tournamentService.getMessage();
@@ -26,9 +24,7 @@ describe('Registration', () => {
   it('should autofill 4 contestants', () => {
     const contestants = [ 'John','Paul', 'George', 'Ringo' ];
 
-    const autofill4 = element(by.id('autoFill4'));
-    autofill4.click()
-
+    tournamentService.autofill(4);
     tournamentService.registerContestants();
 
     const contestantsList = tournamentService.getMessage();
@@ -40,9 +36,7 @@ describe('Registration', () => {
   it('should autofill 8 contestants', () => {
     const contestants = [ 'Leia','Luke', 'Lando', 'Han', 'Chewy', 'R2D2', 'C3P0', 'Vader' ];
 
-    const autofill8 = element(by.id('autoFill8'));
-    autofill8.click()
-
+    tournamentService.autofill(8);
     tournamentService.registerContestants();
 
     const contestantsList = tournamentService.getMessage();

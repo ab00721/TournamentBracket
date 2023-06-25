@@ -6,6 +6,15 @@ export class TournamentService {
     return message.getText();
   }
 
+  navigateTo(url: string) {
+    browser.get(url);
+  }
+
+  getPageTitle() {
+    const pageTitle = element(by.id('subpageTitle'));
+    return pageTitle.getText();
+  }
+
   inputContestants(contestants: string[]) {
     const contestantInputs = element.all(by.css('input[type="text"]'));
     contestants.forEach((contestant,index) => {
@@ -16,5 +25,15 @@ export class TournamentService {
   registerContestants() {
     const registerButton = element(by.id('submit'));
     registerButton.click();
+  }
+
+  autofill(count: number) {
+    const autofillButton = element(by.id('autoFill' + count));
+    autofillButton.click();
+  }
+
+  clickById(id: string) {
+    const button = element(by.id(id));
+    button.click();
   }
 }

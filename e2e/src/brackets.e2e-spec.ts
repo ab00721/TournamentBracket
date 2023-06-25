@@ -1,7 +1,11 @@
 import { browser, by, element } from 'protractor';
+import { TournamentService } from './tournament.service'
 
 describe('Brackets', () => {
+  let tournamentService;
+
   beforeEach(() => {
+    tournamentService = new TournamentService();
     browser.get('/registration');
   });
 
@@ -9,17 +13,13 @@ describe('Brackets', () => {
 
     it('should seed 2 contestants', () => {
       const contestants = ['player1', 'player2'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
 
-      const matches = element.all(by.css('div[id^="match"]'));
+      const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
 
       const match1 = matches.get(0);
@@ -34,17 +34,13 @@ describe('Brackets', () => {
 
     it('should seed 4 contestants', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
 
-      const matches = element.all(by.css('div[id^="match"]'));
+      const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(2);
 
       const match1 = matches.get(0);
@@ -67,17 +63,13 @@ describe('Brackets', () => {
 
     it('should seed 8 contestants', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4', 'player5', 'player6', 'player7', 'player8'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
 
-      const matches = element.all(by.css('div[id^="match"]'));
+      const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(4);
 
       const match1 = matches.get(0);
@@ -119,17 +111,13 @@ describe('Brackets', () => {
 
     it('should complete a round with 2 players and player 1 wins', () => {
       const contestants = ['player1', 'player2'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
 
-      const matches = element.all(by.css('div[id^="match"]'));
+      const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
 
       const match1 = matches.get(0);
@@ -151,12 +139,8 @@ describe('Brackets', () => {
 
     it('should complete a round with 2 players and player 2 wins', () => {
       const contestants = ['player1', 'player2'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
@@ -183,12 +167,8 @@ describe('Brackets', () => {
 
     it('should complete 2 rounds with 4 players', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
@@ -210,7 +190,7 @@ describe('Brackets', () => {
       const round = element(by.id('round'));
       expect(round.getText()).toEqual('Round: 2');
 
-      const matchesR2 = element.all(by.css('div[id^="match"]'));
+      const matchesR2 = element.all(by.id('matches'));
       expect(matchesR2.count()).toEqual(1);
 
       const match1R2 = matchesR2.get(0);
@@ -225,12 +205,8 @@ describe('Brackets', () => {
 
     it('should complete 3 rounds with 8 players', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4', 'player5', 'player6', 'player7', 'player8'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
@@ -293,12 +269,8 @@ describe('Brackets', () => {
 
     it('should set error message if matches are not complete', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
-      const contestantInputs = element.all(by.css('input[type="text"]'));
-      contestants.forEach((contestant, index) => {
-        contestantInputs.get(index).sendKeys(contestant);
-      });
-      const registerButton = element(by.id('submit'));
-      registerButton.click();
+      tournamentService.inputContestants(contestants);
+      tournamentService.registerContestants();
 
       const bracketsLink = element(by.id('brackets'));
       bracketsLink.click();
