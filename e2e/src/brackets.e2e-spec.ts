@@ -15,9 +15,7 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
-
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
+      tournamentService.clickById('brackets');
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
@@ -36,9 +34,7 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
-
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
+      tournamentService.clickById('brackets');
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(2);
@@ -65,9 +61,8 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4', 'player5', 'player6', 'player7', 'player8'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
+      tournamentService.clickById('brackets');
 
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(4);
@@ -113,9 +108,8 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
+      tournamentService.clickById('brackets');
 
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
@@ -141,9 +135,8 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
+      tournamentService.clickById('brackets');
 
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
@@ -169,9 +162,8 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
+      tournamentService.clickById('brackets');
 
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
 
       const matchesR1 = element.all(by.id('matches'));
       expect(matchesR1.count()).toEqual(2);
@@ -207,9 +199,8 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4', 'player5', 'player6', 'player7', 'player8'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
+      tournamentService.clickById('brackets');
 
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
 
       const round = element(by.id('round'));
       expect(round.getText()).toEqual('Round: 1');
@@ -271,9 +262,8 @@ describe('Brackets', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
       tournamentService.inputContestants(contestants);
       tournamentService.registerContestants();
+      tournamentService.clickById('brackets');
 
-      const bracketsLink = element(by.id('brackets'));
-      bracketsLink.click();
 
       const round = element(by.id('round'));
       expect(round.getText()).toEqual('Round: 1');

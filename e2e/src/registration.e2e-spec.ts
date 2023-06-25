@@ -82,54 +82,42 @@ describe('Registration', () => {
     const contestants = [ 'player1','player2','player3','player4','player5','player6','player7' ];
     tournamentService.inputContestants(contestants);
     tournamentService.registerContestants();
-
-    const errorMessage = tournamentService.getMessage();
-    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
+    expect(tournamentService.getMessage()).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 6 contestants', () => {
     const contestants = [ 'player1','player2','player3','player4','player5','player6' ];
     tournamentService.inputContestants(contestants);
     tournamentService.registerContestants();
-
-    const errorMessage = tournamentService.getMessage();
-    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
+    expect(tournamentService.getMessage()).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 5 contestants', () => {
     const contestants = [ 'player1','player2','player3','player4','player5' ];
     tournamentService.inputContestants(contestants);
     tournamentService.registerContestants();
-
-    const errorMessage = tournamentService.getMessage();
-    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
+    expect(tournamentService.getMessage()).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 3 contestants', () => {
     const contestants = [ 'player1','player2','player3' ];
     tournamentService.inputContestants(contestants);
     tournamentService.registerContestants();
-
-    const errorMessage = tournamentService.getMessage();
-    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
+    expect(tournamentService.getMessage()).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if 1 contestants', () => {
     const contestants = [ 'player1' ];
     tournamentService.inputContestants(contestants);
     tournamentService.registerContestants();
-
-    const errorMessage = tournamentService.getMessage();
-    expect(errorMessage).toEqual('Should be 2, 4, or 8 contestants');
+    expect(tournamentService.getMessage()).toEqual('Should be 2, 4, or 8 contestants');
   });
 
   it('should set error message if duplicate contestants', () => {
     const contestants = [ 'player1','player1' ];
     tournamentService.inputContestants(contestants);
     tournamentService.registerContestants();
-
-    const errorMessage = tournamentService.getMessage();
-    expect(errorMessage).toEqual('Duplicate player');
+    expect(tournamentService.getMessage()).toEqual('Duplicate player');
   });
 
 });

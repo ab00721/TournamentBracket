@@ -1,10 +1,6 @@
 import { browser, by, element } from 'protractor';
 
 export class TournamentService {
-  getMessage() {
-    const message = element(by.id('message'));
-    return message.getText();
-  }
 
   navigateTo(url: string) {
     browser.get(url);
@@ -13,6 +9,16 @@ export class TournamentService {
   getPageTitle() {
     const pageTitle = element(by.id('subpageTitle'));
     return pageTitle.getText();
+  }
+
+  getMessage() {
+    const message = element(by.id('message'));
+    return message.getText();
+  }
+
+  autofill(count: number) {
+    const autofillButton = element(by.id('autoFill' + count));
+    autofillButton.click();
   }
 
   inputContestants(contestants: string[]) {
@@ -27,10 +33,18 @@ export class TournamentService {
     registerButton.click();
   }
 
-  autofill(count: number) {
-    const autofillButton = element(by.id('autoFill' + count));
-    autofillButton.click();
-  }
+  // contestantsList() {
+  //   return this.getMessage().then((message) => {
+  //     return message.split(',');
+  //   });
+  // }
+  //
+  // checkIfRegistered(contestants: string[]) {
+  //   const list = this.contestantsList(contestants);
+  //   return contestants.forEach((contestant) => {
+  //     list.contains(contestant);
+  //   });
+  // }
 
   clickById(id: string) {
     const button = element(by.id(id));
