@@ -16,4 +16,8 @@ export class TournamentService {
     return elementToRead.getText();
   }
 
+  getArray(id: string) {
+    return element.all(by.id(id));
+  }
+
 }
