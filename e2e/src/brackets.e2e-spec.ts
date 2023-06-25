@@ -26,16 +26,16 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
-      expect(bracketsService.getMatches().count()).toEqual(1);
+      const matches = bracketsService.getMatches();
+      expect(matches.count()).toEqual(1);
 
-      const match1 = bracketsService.getMatches().get(0);
-      const player1match1 = match1.element(by.id('player1'));
-      const player2match1 = match1.element(by.id('player2'));
+      const match1 = matches.get(0);
 
-      expect(player1match1.isPresent()).toBe(true);
-      expect(player2match1.isPresent()).toBe(true);
-      expect(player1match1.getAttribute('value')).toEqual('player1');
-      expect(player2match1.getAttribute('value')).toEqual('player2');
+      const player1match1 = bracketsService.getContestant(match1, 'player1');
+      const player2match1 = bracketsService.getContestant(match1, 'player2');
+
+      expect(player1match1).toEqual('player1');
+      expect(player2match1).toEqual('player2');
     });
 
     it('should seed 4 contestants', () => {
@@ -44,25 +44,21 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
-      const matches = element.all(by.id('matches'));
-      expect(bracketsService.getMatches().count()).toEqual(2);
+      const matches = bracketsService.getMatches();
+      expect(matches.count()).toEqual(2);
 
-      const match1 = bracketsService.getMatches().get(0);
-      const player1match1 = match1.element(by.id('player1'));
-      const player2match1 = match1.element(by.id('player2'));
+      const match1 = matches.get(0);
+      const match2 = matches.get(1);
 
-      const match2 = bracketsService.getMatches().get(1);
-      const player1match2 = match2.element(by.id('player1'));
-      const player2match2 = match2.element(by.id('player2'));
+      const player1match1 = bracketsService.getContestant(match1, 'player1');
+      const player2match1 = bracketsService.getContestant(match1, 'player2');
+      const player1match2 = bracketsService.getContestant(match2, 'player1');
+      const player2match2 = bracketsService.getContestant(match2, 'player2');
 
-      expect(player1match1.isPresent()).toBe(true);
-      expect(player2match1.isPresent()).toBe(true);
-      expect(player1match2.isPresent()).toBe(true);
-      expect(player2match2.isPresent()).toBe(true);
-      expect(player1match1.getAttribute('value')).toEqual('player1');
-      expect(player2match1.getAttribute('value')).toEqual('player2');
-      expect(player1match2.getAttribute('value')).toEqual('player3');
-      expect(player2match2.getAttribute('value')).toEqual('player4');
+      expect(player1match1).toEqual('player1');
+      expect(player2match1).toEqual('player2');
+      expect(player1match2).toEqual('player3');
+      expect(player2match2).toEqual('player4');
     });
 
     it('should seed 8 contestants', () => {
@@ -71,43 +67,32 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
-      const matches = element.all(by.id('matches'));
-      expect(bracketsService.getMatches().count()).toEqual(4);
+      const matches = bracketsService.getMatches();
+      expect(matches.count()).toEqual(4);
 
-      const match1 = bracketsService.getMatches().get(0);
-      const match2 = bracketsService.getMatches().get(1);
-      const match3 = bracketsService.getMatches().get(2);
-      const match4 = bracketsService.getMatches().get(3);
+      const match1 = matches.get(0);
+      const match2 = matches.get(1);
+      const match3 = matches.get(2);
+      const match4 = matches.get(3);
 
 
-      const player1match1 = match1.element(by.id('player1'));
-      const player2match1 = match1.element(by.id('player2'));
+      const player1match1 = bracketsService.getContestant(match1, 'player1');
+      const player2match1 = bracketsService.getContestant(match1, 'player2');
+      const player1match2 = bracketsService.getContestant(match2, 'player1');
+      const player2match2 = bracketsService.getContestant(match2, 'player2');
+      const player1match3 = bracketsService.getContestant(match3, 'player1');
+      const player2match3 = bracketsService.getContestant(match3, 'player2');
+      const player1match4 = bracketsService.getContestant(match4, 'player1');
+      const player2match4 = bracketsService.getContestant(match4, 'player2');
 
-      const player1match2 = match2.element(by.id('player1'));
-      const player2match2 = match2.element(by.id('player2'));
-
-      const player1match3 = match3.element(by.id('player1'));
-      const player2match3 = match3.element(by.id('player2'));
-
-      const player1match4 = match4.element(by.id('player1'));
-      const player2match4 = match4.element(by.id('player2'));
-
-      expect(player1match1.isPresent()).toBe(true);
-      expect(player2match1.isPresent()).toBe(true);
-      expect(player1match2.isPresent()).toBe(true);
-      expect(player2match2.isPresent()).toBe(true);
-      expect(player1match3.isPresent()).toBe(true);
-      expect(player2match3.isPresent()).toBe(true);
-      expect(player1match4.isPresent()).toBe(true);
-      expect(player2match4.isPresent()).toBe(true);
-      expect(player1match1.getAttribute('value')).toEqual('player1');
-      expect(player2match1.getAttribute('value')).toEqual('player2');
-      expect(player1match2.getAttribute('value')).toEqual('player3');
-      expect(player2match2.getAttribute('value')).toEqual('player4');
-      expect(player1match3.getAttribute('value')).toEqual('player5');
-      expect(player2match3.getAttribute('value')).toEqual('player6');
-      expect(player1match4.getAttribute('value')).toEqual('player7');
-      expect(player2match4.getAttribute('value')).toEqual('player8');
+      expect(player1match1).toEqual('player1');
+      expect(player2match1).toEqual('player2');
+      expect(player1match2).toEqual('player3');
+      expect(player2match2).toEqual('player4');
+      expect(player1match3).toEqual('player5');
+      expect(player2match3).toEqual('player6');
+      expect(player1match4).toEqual('player7');
+      expect(player2match4).toEqual('player8');
     });
   });
 
@@ -119,12 +104,12 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
-      const matches = element.all(by.id('matches'));
-      expect(bracketsService.getMatches().count()).toEqual(1);
+      const matches = bracketsService.getMatches();
+      expect(matches.count()).toEqual(1);
 
-      const match1 = bracketsService.getMatches().get(0);
-      const player1match1 = match1.element(by.id('player1'));
-      const player2match1 = match1.element(by.id('player2'));
+      const match1 = matches.get(0);
+      const player1match1 = bracketsService.getContestant(match1, 'player1');
+      const player2match1 = bracketsService.getContestant(match1, 'player2');
 
       player1match1.click();
       bracketsService.completeRound();
@@ -143,8 +128,8 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
-      const matches = element.all(by.id('matches'));
-      expect(bracketsService.getMatches().count()).toEqual(1);
+      const matches = bracketsService.getMatches();
+      expect(matches.count()).toEqual(1);
 
       const match1 = bracketsService.getMatches().get(0);
       const player1match1 = match1.element(by.id('player1'));
