@@ -1,33 +1,33 @@
 import { browser, by, element } from 'protractor';
-import { TournamentService } from './tournament.service'
+import { RoutingService } from './routing.service'
 
 describe('Routing', () => {
-  let tournamentService;
+  let routingService;
 
   beforeEach(() => {
-    tournamentService = new TournamentService();
+    routingService = new RoutingService();
   });
 
   it('should navigate to the welcome page', () => {
-    tournamentService.navigateTo('/');
-    expect(tournamentService.getPageTitle()).toEqual('Brackets App');
+    routingService.loadPage('/');
+    expect(routingService.getPageTitle()).toEqual('Brackets App');
   });
 
   it('should navigate to the registration page', () => {
-    tournamentService.navigateTo('/');
-    tournamentService.clickById('registration');
-    expect(tournamentService.getPageTitle()).toEqual('Register Players');
+    routingService.loadPage('/');
+    routingService.navigateTo('registration');
+    expect(routingService.getPageTitle()).toEqual('Register Players');
   });
 
   it('should navigate to the brackets page', () => {
-    tournamentService.navigateTo('/');
-    tournamentService.clickById('brackets');
-    expect(tournamentService.getPageTitle()).toEqual('Brackets');
+    routingService.loadPage('/');
+    routingService.navigateTo('brackets');
+    expect(routingService.getPageTitle()).toEqual('Brackets');
   });
 
   it('should navigate to the welcome page from brackets page', () => {
-    tournamentService.navigateTo('/brackets');
-    tournamentService.clickById('welcome');
-    expect(tournamentService.getPageTitle()).toEqual('Brackets App');
+    routingService.loadPage('/brackets');
+    routingService.navigateTo('welcome');
+    expect(routingService.getPageTitle()).toEqual('Brackets App');
   });
 });

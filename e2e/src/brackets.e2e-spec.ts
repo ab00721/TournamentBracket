@@ -1,21 +1,27 @@
 import { browser, by, element } from 'protractor';
+import { RoutingService } from './routing.service'
+import { RegistrationService } from './registration.service'
 import { TournamentService } from './tournament.service'
 
 describe('Brackets', () => {
+  let routingService;
+  let registrationService;
   let tournamentService;
 
   beforeEach(() => {
+    routingService = new RoutingService();
+    registrationService = new RegistrationService();
     tournamentService = new TournamentService();
-    browser.get('/registration');
+    routingService.loadPage('/registration');
   });
 
   describe('Seeding', () => {
 
     it('should seed 2 contestants', () => {
       const contestants = ['player1', 'player2'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
@@ -32,9 +38,9 @@ describe('Brackets', () => {
 
     it('should seed 4 contestants', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(2);
@@ -59,10 +65,9 @@ describe('Brackets', () => {
 
     it('should seed 8 contestants', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4', 'player5', 'player6', 'player7', 'player8'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
-
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(4);
@@ -106,10 +111,9 @@ describe('Brackets', () => {
 
     it('should complete a round with 2 players and player 1 wins', () => {
       const contestants = ['player1', 'player2'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
-
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
@@ -133,10 +137,9 @@ describe('Brackets', () => {
 
     it('should complete a round with 2 players and player 2 wins', () => {
       const contestants = ['player1', 'player2'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
-
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const matches = element.all(by.id('matches'));
       expect(matches.count()).toEqual(1);
@@ -160,10 +163,9 @@ describe('Brackets', () => {
 
     it('should complete 2 rounds with 4 players', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
-
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const matchesR1 = element.all(by.id('matches'));
       expect(matchesR1.count()).toEqual(2);
@@ -197,10 +199,9 @@ describe('Brackets', () => {
 
     it('should complete 3 rounds with 8 players', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4', 'player5', 'player6', 'player7', 'player8'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
-
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const round = element(by.id('round'));
       expect(round.getText()).toEqual('Round: 1');
@@ -260,10 +261,9 @@ describe('Brackets', () => {
 
     it('should set error message if matches are not complete', () => {
       const contestants = ['player1', 'player2', 'player3', 'player4'];
-      tournamentService.inputContestants(contestants);
-      tournamentService.registerContestants();
-      tournamentService.clickById('brackets');
-
+      registrationService.inputContestants(contestants);
+      registrationService.registerContestants();
+      routingService.navigateTo('brackets');
 
       const round = element(by.id('round'));
       expect(round.getText()).toEqual('Round: 1');
