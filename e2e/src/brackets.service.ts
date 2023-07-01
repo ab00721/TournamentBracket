@@ -25,8 +25,13 @@ export class BracketsService {
     return player.getAttribute('value');
   }
 
-  getPlayer2() {
-    const player2 = this.tournamentService.read('player2');
-    return player2;
+  setMatchWinner(match: any, playerId: string) {
+    const winner = match.element(by.id(playerId));
+    winner.click();
   }
+
+  getChampion() {
+    return this.tournamentService.read('champion');
+  }
+
 }

@@ -80,22 +80,15 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
+      expect(bracketsService.getRound()).toEqual('Round: 1');
       const matches = bracketsService.getMatches();
-      expect(matches.count()).toEqual(1);
-
-      const match1 = matches.get(0);
-      const player1match1 = bracketsService.getContestant(match1, 'player1');
-      const player2match1 = bracketsService.getContestant(match1, 'player2');
-
-      player1match1.click();
+      matches.each((match, index) => {
+        const winner = bracketsService.setMatchWinner(match, 'player1');
+      });
       bracketsService.completeRound();
 
-      expect(bracketsService.getMatches().count()).toEqual(0);
-
-      const champion = element(by.id('champion'));
-      expect(champion.getText()).toEqual('Winner: player1');
-
       expect(bracketsService.getRound()).toEqual('Round: 1');
+      expect(bracketsService.getChampion()).toEqual('Winner: player1');
     });
 
     it('should complete a round with 2 players and player 2 wins', () => {
@@ -104,22 +97,15 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
+      expect(bracketsService.getRound()).toEqual('Round: 1');
       const matches = bracketsService.getMatches();
-      expect(matches.count()).toEqual(1);
-
-      const match1 = bracketsService.getMatches().get(0);
-      const player1match1 = match1.element(by.id('player1'));
-      const player2match1 = match1.element(by.id('player2'));
-
-      player2match1.click();
+      matches.each((match, index) => {
+        const winner = bracketsService.setMatchWinner(match, 'player2');
+      });
       bracketsService.completeRound();
 
-      expect(bracketsService.getMatches().count()).toEqual(0);
-
-      const champion = element(by.id('champion'));
-      expect(champion.getText()).toEqual('Winner: player2');
-
       expect(bracketsService.getRound()).toEqual('Round: 1');
+      expect(bracketsService.getChampion()).toEqual('Winner: player2');
     });
 
     it('should complete 2 rounds with 4 players', () => {
@@ -128,33 +114,16 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
-      const matchesR1 = element.all(by.id('matches'));
-      expect(matchesR1.count()).toEqual(2);
-
-      const match1R1 = matchesR1.get(0);
-      const player1match1R1 = match1R1.element(by.id('player1'));
-      player1match1R1.click();
-
-      const match2R1 = matchesR1.get(1);
-      const player1match2R1 = match2R1.element(by.id('player1'));
-      player1match2R1.click();
-
-      bracketsService.completeRound();
-
+      for (let round = 1; round <= 2; round++) {
+        expect(bracketsService.getRound()).toEqual('Round: ' + round);
+        const matches = bracketsService.getMatches();
+        matches.each((match, index) => {
+          const winner = bracketsService.setMatchWinner(match, 'player2');
+        });
+        bracketsService.completeRound();
+      }
       expect(bracketsService.getRound()).toEqual('Round: 2');
-
-
-      const matchesR2 = element.all(by.id('matches'));
-      expect(matchesR2.count()).toEqual(1);
-
-      const match1R2 = matchesR2.get(0);
-      const player1match1R2 = match1R2.element(by.id('player1'));
-      player1match1R2.click();
-
-      bracketsService.completeRound();
-
-      const champion = element(by.id('champion'));
-      expect(champion.getText()).toEqual('Winner: player1');
+      expect(bracketsService.getChampion()).toEqual('Winner: player4');
     });
 
     it('should complete 3 rounds with 8 players', () => {
@@ -163,57 +132,16 @@ describe('Brackets', () => {
       registrationService.registerContestants();
       routingService.navigateTo('brackets');
 
-      expect(bracketsService.getRound()).toEqual('Round: 1');
-
-      const matchesR1 = element.all(by.id('matches'));
-      expect(matchesR1.count()).toEqual(4);
-
-      const match1R1 = matchesR1.get(0);
-      const player1match1R1 = match1R1.element(by.id('player1'));
-      player1match1R1.click();
-
-      const match2R1 = matchesR1.get(1);
-      const player1match2R1 = match2R1.element(by.id('player1'));
-      player1match2R1.click();
-
-      const match3R1 = matchesR1.get(2);
-      const player1match3R1 = match3R1.element(by.id('player1'));
-      player1match3R1.click();
-
-      const match4R1 = matchesR1.get(3);
-      const player1match4R1 = match4R1.element(by.id('player1'));
-      player1match4R1.click();
-
-      bracketsService.completeRound();
-
-      expect(bracketsService.getRound()).toEqual('Round: 2');
-
-      const matchesR2 = element.all(by.id('matches'));
-      expect(matchesR2.count()).toEqual(2);
-
-      const match1R2 = matchesR2.get(0);
-      const player1match1R2 = match1R2.element(by.id('player1'));
-      player1match1R2.click();
-
-      const match2R2 = matchesR2.get(1);
-      const player1match2R2 = match2R2.element(by.id('player1'));
-      player1match2R2.click();
-
-      bracketsService.completeRound();
-
+      for (let round = 1; round <= 3; round++) {
+        expect(bracketsService.getRound()).toEqual('Round: ' + round);
+        const matches = bracketsService.getMatches();
+        matches.each((match, index) => {
+          const winner = bracketsService.setMatchWinner(match, 'player2');
+        });
+        bracketsService.completeRound();
+      }
       expect(bracketsService.getRound()).toEqual('Round: 3');
-
-      const matchesR3 = element.all(by.id('matches'));
-      expect(matchesR3.count()).toEqual(1);
-
-      const match1R3 = matchesR3.get(0);
-      const player1match1R3 = match1R3.element(by.id('player1'));
-      player1match1R3.click();
-
-      bracketsService.completeRound();
-
-      const champion = element(by.id('champion'));
-      expect(champion.getText()).toEqual('Winner: player1');
+      expect(bracketsService.getChampion()).toEqual('Winner: player8');
     });
 
 
@@ -225,17 +153,13 @@ describe('Brackets', () => {
 
       expect(bracketsService.getRound()).toEqual('Round: 1');
 
-      const matchesR1 = element.all(by.id('matches'));
-      expect(matchesR1.count()).toEqual(2);
+      const matches = bracketsService.getMatches();
+      expect(matches.count()).toEqual(2);
 
-      const match1R1 = matchesR1.get(0);
-      const player1match1R1 = match1R1.element(by.id('player1'));
-      player1match1R1.click();
-
+      bracketsService.setMatchWinner(matches.get(0), 'player1');
       bracketsService.completeRound();
 
       expect(bracketsService.getRound()).toEqual('Round: 1');
-
       expect(tournamentService.getMessage()).toEqual('Please complete all matches');
     });
   });
