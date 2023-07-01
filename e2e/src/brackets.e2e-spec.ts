@@ -29,13 +29,12 @@ describe('Brackets', () => {
       const matches = bracketsService.getMatches();
       expect(matches.count()).toEqual(1);
 
-      const match1 = matches.get(0);
-
-      const player1match1 = bracketsService.getContestant(match1, 'player1');
-      const player2match1 = bracketsService.getContestant(match1, 'player2');
-
-      expect(player1match1).toEqual('player1');
-      expect(player2match1).toEqual('player2');
+      matches.each((match, index) => {
+        const player1 = bracketsService.getContestant(match, 'player1');
+        const player2 = bracketsService.getContestant(match, 'player2');
+        expect(player1).toEqual(contestants[index*2]);
+        expect(player2).toEqual(contestants[index*2+1]);
+      });
     });
 
     it('should seed 4 contestants', () => {
@@ -47,18 +46,12 @@ describe('Brackets', () => {
       const matches = bracketsService.getMatches();
       expect(matches.count()).toEqual(2);
 
-      const match1 = matches.get(0);
-      const match2 = matches.get(1);
-
-      const player1match1 = bracketsService.getContestant(match1, 'player1');
-      const player2match1 = bracketsService.getContestant(match1, 'player2');
-      const player1match2 = bracketsService.getContestant(match2, 'player1');
-      const player2match2 = bracketsService.getContestant(match2, 'player2');
-
-      expect(player1match1).toEqual('player1');
-      expect(player2match1).toEqual('player2');
-      expect(player1match2).toEqual('player3');
-      expect(player2match2).toEqual('player4');
+      matches.each((match, index) => {
+        const player1 = bracketsService.getContestant(match, 'player1');
+        const player2 = bracketsService.getContestant(match, 'player2');
+        expect(player1).toEqual(contestants[index*2]);
+        expect(player2).toEqual(contestants[index*2+1]);
+      });
     });
 
     it('should seed 8 contestants', () => {
@@ -70,29 +63,12 @@ describe('Brackets', () => {
       const matches = bracketsService.getMatches();
       expect(matches.count()).toEqual(4);
 
-      const match1 = matches.get(0);
-      const match2 = matches.get(1);
-      const match3 = matches.get(2);
-      const match4 = matches.get(3);
-
-
-      const player1match1 = bracketsService.getContestant(match1, 'player1');
-      const player2match1 = bracketsService.getContestant(match1, 'player2');
-      const player1match2 = bracketsService.getContestant(match2, 'player1');
-      const player2match2 = bracketsService.getContestant(match2, 'player2');
-      const player1match3 = bracketsService.getContestant(match3, 'player1');
-      const player2match3 = bracketsService.getContestant(match3, 'player2');
-      const player1match4 = bracketsService.getContestant(match4, 'player1');
-      const player2match4 = bracketsService.getContestant(match4, 'player2');
-
-      expect(player1match1).toEqual('player1');
-      expect(player2match1).toEqual('player2');
-      expect(player1match2).toEqual('player3');
-      expect(player2match2).toEqual('player4');
-      expect(player1match3).toEqual('player5');
-      expect(player2match3).toEqual('player6');
-      expect(player1match4).toEqual('player7');
-      expect(player2match4).toEqual('player8');
+      matches.each((match, index) => {
+        const player1 = bracketsService.getContestant(match, 'player1');
+        const player2 = bracketsService.getContestant(match, 'player2');
+        expect(player1).toEqual(contestants[index*2]);
+        expect(player2).toEqual(contestants[index*2+1]);
+      });
     });
   });
 

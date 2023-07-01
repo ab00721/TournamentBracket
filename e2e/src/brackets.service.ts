@@ -20,22 +20,10 @@ export class BracketsService {
     return this.tournamentService.getArray('matches');
   }
 
-  // getPlayer1ByMatch(match: number) {
-  //   const matchNumber = this.getMatches().get(match);
-  //   const player1 = matchNumber.getPlayer1();
-  //   return player1;
-  //}
-
   getContestant(match: any, playerId: string) {
     const player = match.element(by.id(playerId));
     return player.getAttribute('value');
   }
-
-  // getPlayer2ByMatch(match: number) {
-  //   const matchNumber = this.getMatches().get(match);
-  //   const player2 = matchNumber.getPlayer2();
-  //   return player2;
-  //}
 
   getPlayer2() {
     const player2 = this.tournamentService.read('player2');
